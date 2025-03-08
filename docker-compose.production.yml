@@ -1,7 +1,12 @@
 services:
   postgres:
     image: postgres:13
-    env_file: .env
+    environment:
+      POSTGRES_USER: kittygram_user
+      POSTGRES_PASSWORD: kittygram_password
+      POSTGRES_DB: kittygram
+    ports:
+      - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
 
