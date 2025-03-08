@@ -99,5 +99,5 @@ class CatSerializer(serializers.ModelSerializer):
             request = self.context.get('request')
             if request is not None:
                 path = request.build_absolute_uri(data['image']).split('://')[-1].split('/', 1)[1]
-                data['image'] = f'http://localhost:9000/{path}'
+                data['image'] = f'{request.scheme}://{request.get_host()}/{path}'
         return data
