@@ -16,13 +16,11 @@ services:
 
   frontend:
     image: ${DOCKER_USERNAME}/kittygram_frontend
-    build: 
-      context: ./frontend/
-      dockerfile: Dockerfile
+    volumes:
+      - static:/frontend_static/
 
   gateway:
     image: ${DOCKER_USERNAME}/kittygram_gateway
-    build: ./nginx/
     ports:
       - "9000:80"
     volumes:
