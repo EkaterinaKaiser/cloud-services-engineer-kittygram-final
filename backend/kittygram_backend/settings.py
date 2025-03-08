@@ -7,7 +7,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG', '').lower() == 'true'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '185.91.54.85,127.0.0.1,localhost').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'ekaiser.ru,www.ekaiser.ru,185.91.54.85,127.0.0.1,localhost').split(',')
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost:9000']
 CSRF_COOKIE_SECURE = False
@@ -39,7 +39,34 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework',
     'djoser',
+    'corsheaders',
     'cats.apps.CatsConfig',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://ekaiser.ru",
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +77,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'kittygram_backend.urls'
