@@ -40,10 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework.authtoken',
     'rest_framework',
+    'csp',
     'djoser',
     'corsheaders',
     'cats.apps.CatsConfig',
 ]
+
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "'unsafe-eval'")
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
