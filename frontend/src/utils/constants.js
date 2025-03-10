@@ -1,4 +1,4 @@
-export const URL = "https://ekaiser.ru/";
+export const URL = "https://ekaiser.ru";
 
 export const colorsList = [
   "#FFE4C4",
