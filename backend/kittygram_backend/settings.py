@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:80",
-    "https://ekaiser.ru",
+    "https://ekaiser.ru"
 ]
 
 CORS_ALLOW_METHODS = [
