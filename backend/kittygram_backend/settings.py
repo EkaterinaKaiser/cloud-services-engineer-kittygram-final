@@ -9,7 +9,8 @@ DEBUG = os.getenv('DEBUG', '').lower() == 'true'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'ekaiser.ru,www.ekaiser.ru,185.91.54.85,127.0.0.1,localhost').split(',')
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:9000']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:9000',
+                        'https://ekaiser.ru']
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_DOMAIN = None

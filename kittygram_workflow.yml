@@ -121,8 +121,8 @@ jobs:
           docker compose -f docker-compose.production.yml down
           docker compose -f docker-compose.production.yml up -d
           sleep 10  # Даем время на запуск PostgreSQL
-          docker compose -f docker-compose.production.yml exec -T backend python manage.py migrate
-          docker compose -f docker-compose.production.yml exec -T backend python manage.py collectstatic --no-input
+          docker compose -f docker-compose.production.yml exec -T backend python3 manage.py migrate
+          docker compose -f docker-compose.production.yml exec -T backend python3 manage.py collectstatic --no-input
 
   send_message:
     runs-on: ubuntu-latest
