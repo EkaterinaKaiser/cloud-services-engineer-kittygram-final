@@ -161,10 +161,10 @@ USE_HTTPS = False
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/static/'
+STATIC_ROOT = '/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/app/media/'
+MEDIA_ROOT = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
