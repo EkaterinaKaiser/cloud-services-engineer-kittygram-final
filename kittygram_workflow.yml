@@ -110,7 +110,7 @@ jobs:
           echo "DB_PORT=5432" >> .env
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
           echo "DEBUG=False" >> .env
-          echo "ALLOWED_HOSTS=https://ekaiser.ru,185.91.54.85,127.0.0.1,localhost" >> .env
+          echo "ALLOWED_HOSTS=ekaiser.ru,185.91.54.85,127.0.0.1,localhost" >> .env
           echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> .env
 
       - name: Deploy with docker compose
