@@ -134,7 +134,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          Деплой успешно выполнен по адресу https://ekaiser.ru!
+          Деплой успешно выполнен по адресу https://ekaiser.ru !
           
           Автор: ${{ github.actor }}
           
