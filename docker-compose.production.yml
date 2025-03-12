@@ -16,8 +16,8 @@ services:
     depends_on:
       - postgres
     volumes:
-      - static:/static/
-      - media:/media/
+      - static:/app/static/
+      - media:/app/media/
 
   frontend:
     image: ${DOCKER_USERNAME}/kittygram_frontend
