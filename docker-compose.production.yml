@@ -22,7 +22,8 @@ services:
   frontend:
     image: ${DOCKER_USERNAME}/kittygram_frontend
     volumes:
-      - frontend_static:/usr/share/nginx/html/
+      - static:/frontend_static/
+    command: cp -r /app/build/. /frontend_static/
 
   gateway:
     image: ${DOCKER_USERNAME}/kittygram_gateway
@@ -31,7 +32,6 @@ services:
     volumes:
       - static:/static/
       - media:/media/
-      - frontend_static:/usr/share/nginx/html/
     depends_on:
       - backend
       - frontend
@@ -44,4 +44,4 @@ volumes:
   pg_data:
   static:
   media:
-  frontend_static: 
+  frontend_build: 
