@@ -120,11 +120,11 @@ jobs:
       
       - name: Transfer .env file
         run: |
-          scp -o StrictHostKeyChecking=no .env ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:root/kittygram/
+          scp -o StrictHostKeyChecking=no .env ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/root/kittygram/
       
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd root/kittygram && \
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /root/kittygram && \
           git pull && \
           docker compose -f docker-compose.production.yml pull && \
           docker compose -f docker-compose.production.yml down && \
