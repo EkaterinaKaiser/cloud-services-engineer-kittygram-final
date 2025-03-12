@@ -125,7 +125,6 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /root/kittygram && \
-          git pull && \
           docker compose -f docker-compose.production.yml pull && \
           docker compose -f docker-compose.production.yml down && \
           docker compose -f docker-compose.production.yml up -d && \
