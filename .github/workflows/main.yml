@@ -110,27 +110,19 @@ jobs:
           echo "DB_PORT=5432" >> .env
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
           echo "DEBUG=${{ secrets.DEBUG }}" >> .env
-          echo "ALLOWED_HOSTS=ekaiser.ru,185.91.54.85,127.0.0.1,localhost" >> .env
+          echo "ALLOWED_HOSTS=kittygram2.hopto.org,85.143.145.4,127.0.0.1,localhost" >> .env
           echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> .env
-      
-      - name: Copy .env file to server
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      
-      - name: Transfer .env file
+
+      - name: Deploy with docker compose
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          scp -o StrictHostKeyChecking=no .env ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/root/kittygram/
-      
-      - name: Deploy to server
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /root/kittygram && \
-          docker compose -f docker-compose.production.yml pull && \
-          docker compose -f docker-compose.production.yml down && \
-          docker compose -f docker-compose.production.yml up -d && \
-          sleep 10 && \
-          docker compose -f docker-compose.production.yml exec -T backend python manage.py migrate && \
-          docker compose -f docker-compose.production.yml exec -T backend python manage.py collectstatic --no-input"
+          docker compose -f docker-compose.production.yml pull
+          docker compose -f docker-compose.production.yml down
+          docker compose -f docker-compose.production.yml up -d
+          sleep 10  # Даем время на запуск PostgreSQL
+          docker compose -f docker-compose.production.yml exec -T backend python manage.py migrate
+          docker compose -f docker-compose.production.yml exec -T backend python manage.py collectstatic --no-input
 
   send_message:
     runs-on: ubuntu-latest
@@ -142,7 +134,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          Деплой успешно выполнен по адресу https://ekaiser.ru !
+          Деплой успешно выполнен по адресу https://ekaiser.ru! 🚀
           
           Автор: ${{ github.actor }}
           
