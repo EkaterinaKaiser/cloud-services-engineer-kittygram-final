@@ -116,7 +116,7 @@ jobs:
       - name: Copy files to server
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}d
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       
       - name: Transfer files
         run: |
