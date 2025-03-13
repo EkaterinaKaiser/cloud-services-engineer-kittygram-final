@@ -161,7 +161,7 @@ USE_HTTPS = False
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/app/static/'
+STATIC_ROOT = '/static/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/app/media/'
