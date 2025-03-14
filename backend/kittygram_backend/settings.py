@@ -162,7 +162,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/app/static/'
-
+# работает сейчас с app 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/app/media/'
 
