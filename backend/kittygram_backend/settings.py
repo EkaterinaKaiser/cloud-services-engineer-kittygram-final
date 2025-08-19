@@ -15,7 +15,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:80',
     'https://ekaiser.ru',
     'https://www.ekaiser.ru',
-    '89.169.156.255'
+    'http://89.169.156.255'
 ]
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
@@ -60,7 +60,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:80",
     "https://ekaiser.ru",
     "https://www.ekaiser.ru",
-    "89.169.156.255"
+    "http://89.169.156.255"
 ]
 
 CORS_ALLOW_METHODS = [
