@@ -1,27 +1,56 @@
-ssh_pwauth: no
+#cloud-config
+output:
+  all: '| tee -a /var/log/cloud-init-output.log /dev/console'
+final_message: "cloud-init: finished at $TIMESTAMP. Up $UPTIME seconds"
+bootcmd:
+  - 'echo "[cloud-init] bootcmd: start" > /dev/console'
+ssh_pwauth: yes
 users:
   - name: user
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
-    ssh-authorized-keys:
+    ssh_authorized_keys:
     - "${SSH_KEY}"
+chpasswd:
+  list: |
+    user:user
+  expire: false
 write_files:
+  - path: "/etc/ssh/sshd_config.d/99-password-auth.conf"
+    permissions: "0644"
+    content: |
+      PasswordAuthentication yes
+      ChallengeResponseAuthentication no
+      KbdInteractiveAuthentication no
   - path: "/root/vm_prep.sh"
     permissions: "0740"
     content: |
       #!/bin/bash
+      set -euxo pipefail
+      export DEBIAN_FRONTEND=noninteractive
+      retry() { local n=0; until "$@"; do n=$((n+1)); [ "$n" -ge 5 ] && return 1; sleep $((n*5)); done }
+      echo "[cloud-init] vm_prep.sh: start" > /dev/console
 
-      sudo apt-get update
-      sudo apt-get install -y docker.io
+      # дождаться сети
+      if command -v nm-online >/dev/null 2>&1; then nm-online -q || true; else sleep 15; fi
+
+      retry sudo apt-get update
+      retry sudo apt-get install -y openssh-server ufw
+      sudo systemctl enable --now ssh
+      sudo ufw allow OpenSSH || true
+      sudo ufw disable || true
+      sudo systemctl restart ssh || true
+      
+      retry sudo apt-get install -y docker.io
       sudo systemctl start docker
       sudo systemctl enable docker
-      sudo usermod -aG docker $USER
-      newgrp docker
+      sudo usermod -aG docker user || true
       
-      sudo apt-get install -y docker-compose-plugin
-      docker compose version
+      retry sudo apt-get install -y docker-compose-plugin
+      docker compose version || true
+      echo "[cloud-init] vm_prep.sh: complete" > /dev/console
       
 runcmd:
-  - sleep 120
-  - sudo -i
-  - /root/vm_prep.sh
+  - echo "[cloud-init] runcmd: start" > /dev/console
+  - sleep 10
+  - [ bash, -lc, "chmod +x /root/vm_prep.sh && /root/vm_prep.sh && echo '[cloud-init] vm_prep.sh completed' || (echo '[cloud-init] vm_prep.sh failed, continuing'; true)" ]

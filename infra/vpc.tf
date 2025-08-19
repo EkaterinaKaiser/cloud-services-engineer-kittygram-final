@@ -20,6 +20,11 @@ resource "yandex_vpc_security_group" "infra_sg" {
   }
 	
   ingress {
+    protocol       = "ICMP"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
 	protocol    = "TCP"
 	port        = "22"
 	v4_cidr_blocks = ["0.0.0.0/0"]

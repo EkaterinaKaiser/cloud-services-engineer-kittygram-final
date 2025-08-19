@@ -10,3 +10,4 @@ memory       = 2
 disk_type    = "network-hdd"
 disk_size    = 20
 nat          = true
+static_ip_address = "89.169.156.255"

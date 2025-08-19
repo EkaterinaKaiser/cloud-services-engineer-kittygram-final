@@ -34,6 +34,7 @@ variable "ssh_key" {
   type = string
 }
 
+
 variable "cloud_id" {
   description = "Cloud ID"
   type = string
@@ -90,4 +91,9 @@ variable "nat" {
   description = "Enable NAT"
   type        = bool
   default     = true
+}
+
+variable "static_ip_address" {
+  description = "Public IPv4 address to assign to the VM (must exist and be reserved in YC)"
+  type        = string
 }
