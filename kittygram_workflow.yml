@@ -110,7 +110,7 @@ jobs:
           echo "DB_PORT=5432" >> .env
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
           echo "DEBUG=False" >> .env
-          echo "ALLOWED_HOSTS=ekaiser.ru,185.91.54.85,127.0.0.1,localhost" >> .env
+          echo "ALLOWED_HOSTS=ekaiser.ru,185.91.54.85,127.0.0.1,localhost, 89.169.156.255" >> .env
           echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> .env
 
       - name: Deploy with docker compose
@@ -134,7 +134,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          Деплой успешно выполнен по адресу https://ekaiser.ru!
+          Деплой успешно выполнен по адресу 89.169.156.255!
           
           Автор: ${{ github.actor }}
           

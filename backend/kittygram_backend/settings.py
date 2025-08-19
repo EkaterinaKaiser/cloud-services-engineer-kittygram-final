@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG', '').lower() == 'true'
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'ekaiser.ru,185.91.54.85,127.0.0.1,localhost').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'ekaiser.ru,185.91.54.85,127.0.0.1,localhost, 89.169.156.255').split(',')
 
 
 CSRF_TRUSTED_ORIGINS = [
@@ -14,7 +14,8 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:80',
     'https://ekaiser.ru',
-    'https://www.ekaiser.ru'
+    'https://www.ekaiser.ru',
+    '89.169.156.255'
 ]
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
@@ -58,7 +59,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://localhost:80",
     "https://ekaiser.ru",
-    "https://www.ekaiser.ru"
+    "https://www.ekaiser.ru",
+    "89.169.156.255"
 ]
 
 CORS_ALLOW_METHODS = [
